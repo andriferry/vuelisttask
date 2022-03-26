@@ -39,9 +39,9 @@ export default {
 <style scoped>
 .mainStyle {
     overflow-x: auto;
+    overflow-y: auto;
     scrollbar-color: #ff1744 #ff5252;
     -webkit-overflow-scrolling: touch;
     -webkit-appearance: none;
 }
-
 </style>
