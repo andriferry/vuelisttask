@@ -20,9 +20,32 @@
                                 class="text-subtitle1 d-flex justify-space-between pa-2 font-weight-medium"
                             >
                                 {{ data.cardTitle }}
-                                <v-btn x-small icon color="pink">
-                                    <v-icon>mdi-dots-vertical</v-icon>
-                                </v-btn>
+
+                                <v-menu bottom offset-x>
+                                    <template v-slot:activator="{on, attrs}">
+                                        <v-btn
+                                            x-small
+                                            icon
+                                            color="pink"
+                                            v-bind="attrs"
+                                            v-on="on"
+                                        >
+                                            <v-icon>mdi-dots-vertical</v-icon>
+                                        </v-btn>
+                                    </template>
+
+                                    <v-card rounded="lg">
+                                        <v-card-text>
+                                            <v-btn
+                                                depressed
+                                                @click="deletedCard(index)"
+                                                color="red accent-2 white--text"
+                                            >
+                                                Delete This Card
+                                            </v-btn>
+                                        </v-card-text>
+                                    </v-card>
+                                </v-menu>
                             </v-card-text>
                             <div v-if="!data.cardTitle">
                                 <v-card-text class="px-2">
@@ -147,6 +170,9 @@ export default {
         },
         updateNewTask(index, cardTitle) {
             this.dataTask[index].cardList.push({cardTitle});
+        },
+        deletedCard(index) {
+            this.dataTask.splice(index, 1);
         },
     },
 };
