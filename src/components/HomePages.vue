@@ -56,14 +56,7 @@
                                 </v-card-actions>
                             </div>
 
-                            <v-card-actions
-                                v-else
-                                class="d-flex justify-lg-space-between"
-                            >
-                                <v-btn icon color="pink">
-                                    <v-icon>mdi-plus</v-icon>
-                                </v-btn>
-                            </v-card-actions>
+                            <CardList v-else />
                         </v-card>
                     </v-slide-y-transition>
                 </div>
@@ -116,7 +109,7 @@ export default {
                     openForm: false,
                     dataTitle: '',
                     activeButton: true,
-                    cardList: ['Hello'],
+                    cardList: [],
                 },
             ],
         };
