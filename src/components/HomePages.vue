@@ -75,40 +75,7 @@
 
                     <!-- Card list -->
 
-                    <v-card-text class="pa-1 pb-3">
-                        <v-card>
-                            <v-card-title class="pa-2">
-                                Hello test
-                            </v-card-title>
-                        </v-card>
-                    </v-card-text>
-
-                    <v-slide-y-transition v-show="newList" class="py-0">
-                        <v-card-text v-show="newList" class="px-1 py-0">
-                            <v-text-field
-                                class="pa-0"
-                                color="red accent-2"
-                                solo
-                                dense
-                                v-model="dataTitle"
-                            ></v-text-field>
-
-                            <div class="d-flex justify-space-between">
-                                <v-btn color="red" plain> cancel </v-btn>
-                                <v-btn color="success" plain> Add </v-btn>
-                            </div>
-                        </v-card-text>
-                    </v-slide-y-transition>
-
-                    <v-card-actions
-                        @click="addNewList"
-                        v-if="!newList"
-                        class="d-flex justify-lg-space-between"
-                    >
-                        <v-btn icon color="pink">
-                            <v-icon>mdi-plus</v-icon>
-                        </v-btn>
-                    </v-card-actions>
+                    <CardList />
                 </v-card>
             </div>
         </div>
@@ -116,14 +83,15 @@
 </template>
 
 <script>
+import CardList from '@/components/CardList.vue';
 export default {
     name: 'HomePages',
+    components: {CardList},
     data() {
         return {
             openForm: false,
             activeButton: true,
             dataTitle: '',
-            newList: false,
             cardTitle: '',
         };
     },
