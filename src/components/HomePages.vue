@@ -19,32 +19,44 @@
                                     <v-icon>mdi-dots-vertical</v-icon>
                                 </v-btn>
                             </v-card-text>
-                            <v-card-text class="px-2">
-                                <v-text-field
-                                    ref="form"
-                                    color="red accent-2"
-                                    solo
-                                    dense
-                                    @keypress.enter="addTitleCard"
-                                    v-model="dataTitle"
-                                ></v-text-field>
-                            </v-card-text>
+                            <div class="" v-if="!cardTitle">
+                                <v-card-text class="px-2">
+                                    <v-text-field
+                                        ref="form"
+                                        color="red accent-2"
+                                        solo
+                                        label="Card Title"
+                                        dense
+                                        @keypress.enter="addTitleCard"
+                                        v-model="dataTitle"
+                                    ></v-text-field>
+                                </v-card-text>
+                                <v-card-actions
+                                    class="d-flex justify-space-between pt-0"
+                                >
+                                    <v-btn
+                                        color="red"
+                                        plain
+                                        @click="addNewTask(false)"
+                                    >
+                                        Cancel
+                                    </v-btn>
+                                    <v-btn
+                                        color="success"
+                                        plain
+                                        @click="addTitleCard"
+                                    >
+                                        Add
+                                    </v-btn>
+                                </v-card-actions>
+                            </div>
+
                             <v-card-actions
-                                class="d-flex justify-space-between pt-0"
+                                v-else
+                                class="d-flex justify-lg-space-between"
                             >
-                                <v-btn
-                                    color="red"
-                                    plain
-                                    @click="addNewTask(false)"
-                                >
-                                    Cancel
-                                </v-btn>
-                                <v-btn
-                                    color="success"
-                                    plain
-                                    @click="addTitleCard"
-                                >
-                                    Add
+                                <v-btn icon color="pink">
+                                    <v-icon>mdi-plus</v-icon>
                                 </v-btn>
                             </v-card-actions>
                         </v-card>
@@ -56,7 +68,7 @@
                 </v-card>
             </div>
 
-            <div class="d-flex flex-column" style="gap: 0.5rem">
+            <!-- <div class="d-flex flex-column" style="gap: 0.5rem">
                 <v-card width="344" rounded="lg">
                     <v-btn block> Add list </v-btn>
                 </v-card>
@@ -73,11 +85,9 @@
                         </v-btn>
                     </v-card-text>
 
-                    <!-- Card list -->
-
                     <CardList />
                 </v-card>
-            </div>
+            </div> -->
         </div>
     </v-container>
 </template>
@@ -93,6 +103,12 @@ export default {
             activeButton: true,
             dataTitle: '',
             cardTitle: '',
+            dataTask: [
+                {
+                    cardTitle: '',
+                    cardList: ['Hello'],
+                },
+            ],
         };
     },
     methods: {
