@@ -56,7 +56,7 @@
                                 </v-card-actions>
                             </div>
 
-                            <CardList v-else />
+                            <CardList v-else :taskList="data.cardList" />
                         </v-card>
                     </v-slide-y-transition>
                 </div>
@@ -109,7 +109,11 @@ export default {
                     openForm: false,
                     dataTitle: '',
                     activeButton: true,
-                    cardList: [],
+                    cardList: [
+                        {
+                            cardTitle: 'Test task first',
+                        },
+                    ],
                 },
             ],
         };
