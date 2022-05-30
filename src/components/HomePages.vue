@@ -1,25 +1,30 @@
 <template>
     <v-container fluid>
         <div class="d-flex" style="gap: 1rem">
-            <div class="d-flex flex-column" style="gap: 0.5rem">
-                <div v-show="openForm">
+            <div
+                class="d-flex flex-column"
+                v-for="(data, index) in dataTask"
+                :key="index"
+                style="gap: 0.5rem"
+            >
+                <div v-show="data.openForm">
                     <v-slide-y-transition class="py-0">
                         <v-card
-                            v-show="openForm"
+                            v-show="data.openForm"
                             width="344"
                             color="grey lighten-4"
                             rounded="lg"
                         >
                             <v-card-text
-                                v-if="cardTitle.length > 0"
+                                v-if="data.cardTitle.length > 0"
                                 class="text-subtitle1 d-flex justify-space-between pa-2 font-weight-medium"
                             >
-                                {{ cardTitle }}
+                                {{ data.cardTitle }}
                                 <v-btn x-small icon color="pink">
                                     <v-icon>mdi-dots-vertical</v-icon>
                                 </v-btn>
                             </v-card-text>
-                            <div class="" v-if="!cardTitle">
+                            <div v-if="!data.cardTitle">
                                 <v-card-text class="px-2">
                                     <v-text-field
                                         ref="form"
@@ -27,8 +32,8 @@
                                         solo
                                         label="Card Title"
                                         dense
-                                        @keypress.enter="addTitleCard"
-                                        v-model="dataTitle"
+                                        @keypress.enter="addTitleCard(index)"
+                                        v-model="data.dataTitle"
                                     ></v-text-field>
                                 </v-card-text>
                                 <v-card-actions
@@ -37,14 +42,14 @@
                                     <v-btn
                                         color="red"
                                         plain
-                                        @click="addNewTask(false)"
+                                        @click="addNewTask(index, false)"
                                     >
                                         Cancel
                                     </v-btn>
                                     <v-btn
                                         color="success"
                                         plain
-                                        @click="addTitleCard"
+                                        @click="addTitleCard(index)"
                                     >
                                         Add
                                     </v-btn>
@@ -63,8 +68,10 @@
                     </v-slide-y-transition>
                 </div>
 
-                <v-card v-if="activeButton" width="344" rounded="lg">
-                    <v-btn block @click="addNewTask(true)"> Add list </v-btn>
+                <v-card v-if="data.activeButton" width="344" rounded="lg">
+                    <v-btn block @click="addNewTask(index, true)">
+                        Add list
+                    </v-btn>
                 </v-card>
             </div>
 
@@ -106,26 +113,29 @@ export default {
             dataTask: [
                 {
                     cardTitle: '',
+                    openForm: false,
+                    dataTitle: '',
+                    activeButton: true,
                     cardList: ['Hello'],
                 },
             ],
         };
     },
     methods: {
-        addNewTask(value) {
+        addNewTask(index, value) {
             if (value) {
-                this.openForm = value;
-                this.activeButton = false;
+                this.dataTask[index].openForm = value;
+                this.dataTask[index].activeButton = false;
             } else {
-                this.openForm = value;
-                this.activeButton = true;
+                this.dataTask[index].openForm = value;
+                this.dataTask[index].activeButton = true;
             }
         },
         addNewList() {
             this.newList = true;
         },
-        addTitleCard() {
-            this.cardTitle = this.dataTitle;
+        addTitleCard(index) {
+            this.dataTask[index].cardTitle = this.dataTask[index].dataTitle;
         },
     },
 };
