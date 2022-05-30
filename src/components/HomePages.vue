@@ -56,7 +56,14 @@
                                 </v-card-actions>
                             </div>
 
-                            <CardList v-else :taskList="data.cardList" />
+                            <CardList
+                                v-else
+                                :taskList="data.cardList"
+                                @newTask="
+                                    updateNewTask($event.index, $event.title)
+                                "
+                                :taskIndex="index"
+                            />
                         </v-card>
                     </v-slide-y-transition>
                 </div>
@@ -109,11 +116,7 @@ export default {
                     openForm: false,
                     dataTitle: '',
                     activeButton: true,
-                    cardList: [
-                        {
-                            cardTitle: 'Test task first',
-                        },
-                    ],
+                    cardList: [],
                 },
             ],
         };
@@ -133,6 +136,17 @@ export default {
         },
         addTitleCard(index) {
             this.dataTask[index].cardTitle = this.dataTask[index].dataTitle;
+
+            this.dataTask.push({
+                cardTitle: '',
+                openForm: false,
+                dataTitle: '',
+                activeButton: true,
+                cardList: [],
+            });
+        },
+        updateNewTask(index, cardTitle) {
+            this.dataTask[index].cardList.push({cardTitle});
         },
     },
 };
