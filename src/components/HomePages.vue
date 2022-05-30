@@ -2,30 +2,57 @@
     <v-container fluid>
         <div class="d-flex" style="gap: 1rem">
             <div class="d-flex flex-column" style="gap: 0.5rem">
-                <v-slide-y-transition v-show="openForm" class="py-0">
-                    <v-card v-show="openForm" width="344" rounded="lg">
-                        <v-card-text class="px-2">
-                            <v-text-field
-                                flat
-                                outlined
-                                ref="form"
-                                color="red accent-2"
-                                solo
-                                dense
-                                v-model="data"
-                            ></v-text-field>
-                        </v-card-text>
-                        <v-card-actions
-                            class="d-flex justify-space-between py-0"
+                <div v-show="openForm">
+                    <v-slide-y-transition class="py-0">
+                        <v-card
+                            v-show="openForm"
+                            width="344"
+                            color="grey lighten-4"
+                            rounded="lg"
                         >
-                            <v-btn color="red" plain> Remove </v-btn>
-                            <v-btn color="success" plain> Add </v-btn>
-                        </v-card-actions>
-                    </v-card>
-                </v-slide-y-transition>
+                            <v-card-text
+                                v-if="cardTitle.length > 0"
+                                class="text-subtitle1 d-flex justify-space-between pa-2 font-weight-medium"
+                            >
+                                {{ cardTitle }}
+                                <v-btn x-small icon color="pink">
+                                    <v-icon>mdi-dots-vertical</v-icon>
+                                </v-btn>
+                            </v-card-text>
+                            <v-card-text class="px-2">
+                                <v-text-field
+                                    ref="form"
+                                    color="red accent-2"
+                                    solo
+                                    dense
+                                    @keypress.enter="addTitleCard"
+                                    v-model="dataTitle"
+                                ></v-text-field>
+                            </v-card-text>
+                            <v-card-actions
+                                class="d-flex justify-space-between pt-0"
+                            >
+                                <v-btn
+                                    color="red"
+                                    plain
+                                    @click="addNewTask(false)"
+                                >
+                                    Cancel
+                                </v-btn>
+                                <v-btn
+                                    color="success"
+                                    plain
+                                    @click="addTitleCard"
+                                >
+                                    Add
+                                </v-btn>
+                            </v-card-actions>
+                        </v-card>
+                    </v-slide-y-transition>
+                </div>
 
                 <v-card v-if="activeButton" width="344" rounded="lg">
-                    <v-btn block @click="addNewTask"> Add list </v-btn>
+                    <v-btn block @click="addNewTask(true)"> Add list </v-btn>
                 </v-card>
             </div>
 
@@ -34,27 +61,36 @@
                     <v-btn block> Add list </v-btn>
                 </v-card>
             </div>
+
             <div class="d-flex flex-column" style="gap: 0.5rem">
-                <v-card width="344" rounded="lg">
+                <v-card width="344" color="grey lighten-4" rounded="lg">
                     <v-card-text
                         class="text-subtitle1 d-flex justify-space-between pa-2 font-weight-medium"
                     >
-                        Todo
+                        Todo 2
                         <v-btn x-small icon color="pink">
                             <v-icon>mdi-dots-vertical</v-icon>
                         </v-btn>
                     </v-card-text>
 
+                    <!-- Card list -->
+
+                    <v-card-text class="pa-1 pb-3">
+                        <v-card>
+                            <v-card-title class="pa-2">
+                                Hello test
+                            </v-card-title>
+                        </v-card>
+                    </v-card-text>
+
                     <v-slide-y-transition v-show="newList" class="py-0">
                         <v-card-text v-show="newList" class="px-1 py-0">
                             <v-text-field
-                                flat
-                                outlined
                                 class="pa-0"
                                 color="red accent-2"
                                 solo
                                 dense
-                                v-model="data"
+                                v-model="dataTitle"
                             ></v-text-field>
 
                             <div class="d-flex justify-space-between">
@@ -86,18 +122,26 @@ export default {
         return {
             openForm: false,
             activeButton: true,
-            data: '',
+            dataTitle: '',
             newList: false,
+            cardTitle: '',
         };
     },
     methods: {
-        addNewTask() {
-            this.openForm = true;
-            this.activeButton = false;
-            this.$refs.form.isFocused = true;
+        addNewTask(value) {
+            if (value) {
+                this.openForm = value;
+                this.activeButton = false;
+            } else {
+                this.openForm = value;
+                this.activeButton = true;
+            }
         },
         addNewList() {
             this.newList = true;
+        },
+        addTitleCard() {
+            this.cardTitle = this.dataTitle;
         },
     },
 };
