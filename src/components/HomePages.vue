@@ -97,27 +97,6 @@
                     </v-btn>
                 </v-card>
             </div>
-
-            <!-- <div class="d-flex flex-column" style="gap: 0.5rem">
-                <v-card width="344" rounded="lg">
-                    <v-btn block> Add list </v-btn>
-                </v-card>
-            </div>
-
-            <div class="d-flex flex-column" style="gap: 0.5rem">
-                <v-card width="344" color="grey lighten-4" rounded="lg">
-                    <v-card-text
-                        class="text-subtitle1 d-flex justify-space-between pa-2 font-weight-medium"
-                    >
-                        Todo 2
-                        <v-btn x-small icon color="pink">
-                            <v-icon>mdi-dots-vertical</v-icon>
-                        </v-btn>
-                    </v-card-text>
-
-                    <CardList />
-                </v-card>
-            </div> -->
         </div>
     </v-container>
 </template>
@@ -129,10 +108,6 @@ export default {
     components: {CardList},
     data() {
         return {
-            openForm: false,
-            activeButton: true,
-            dataTitle: '',
-            cardTitle: '',
             dataTask: [
                 {
                     cardTitle: '',
@@ -144,6 +119,7 @@ export default {
             ],
         };
     },
+    computed: {},
     methods: {
         addNewTask(index, value) {
             if (value) {
@@ -174,6 +150,14 @@ export default {
         deletedCard(index) {
             this.dataTask.splice(index, 1);
         },
+    },
+
+    mounted() {
+        const getDataTask = localStorage.getItem('dataTask');
+
+        if (!getDataTask) {
+            localStorage.setItem('dataTask', JSON.stringify(this.dataTask));
+        }
     },
 };
 </script>
