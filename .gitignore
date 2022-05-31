@@ -13,8 +13,8 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-/firebase
-/github
+.firebase/
+.github/
 
 # Editor directories and files
 .idea
