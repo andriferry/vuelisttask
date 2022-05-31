@@ -1,6 +1,6 @@
 <template>
     <v-container fluid>
-        <div class="d-flex" style="gap: 1rem">
+        <draggable v-model="dataTask" class="d-flex" style="gap: 1rem">
             <div
                 class="d-flex flex-column"
                 v-for="(data, index) in dataTask"
@@ -97,15 +97,18 @@
                     </v-btn>
                 </v-card>
             </div>
-        </div>
+        </draggable>
     </v-container>
 </template>
 
 <script>
 import CardList from '@/components/CardList.vue';
+import draggable from 'vuedraggable';
+// import nestedDraggable from '.';
+
 export default {
     name: 'HomePages',
-    components: {CardList},
+    components: {CardList, draggable},
     data() {
         return {
             dataTask: [
