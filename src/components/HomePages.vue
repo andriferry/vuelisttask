@@ -13,7 +13,9 @@
                         <v-slide-y-transition class="py-0">
                             <v-card
                                 v-show="data.openForm"
-                                width="344"
+                                :width="
+                                    $vuetify.breakpoint.mdAndDown ? 200 : 344
+                                "
                                 color="grey lighten-4"
                                 rounded="lg"
                             >
@@ -34,9 +36,9 @@
                                                 v-bind="attrs"
                                                 v-on="on"
                                             >
-                                                <v-icon
-                                                    >mdi-dots-vertical</v-icon
-                                                >
+                                                <v-icon>
+                                                    mdi-dots-vertical
+                                                </v-icon>
                                             </v-btn>
                                         </template>
 
@@ -102,7 +104,11 @@
                         </v-slide-y-transition>
                     </div>
 
-                    <v-card v-if="data.activeButton" width="344" rounded="lg">
+                    <v-card
+                        v-if="data.activeButton"
+                        :width="$vuetify.breakpoint.mdAndDown ? 200 : 344"
+                        rounded="lg"
+                    >
                         <v-btn block @click="addNewTask(index, true)">
                             Add list
                         </v-btn>
