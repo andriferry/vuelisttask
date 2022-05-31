@@ -1,6 +1,6 @@
 <template>
     <v-container fluid>
-        <draggable v-model="dataTask" class="d-flex" style="gap: 1rem">
+        <draggable :list="dataTask" class="d-flex" style="gap: 1rem">
             <div
                 class="d-flex flex-column"
                 v-for="(data, index) in dataTask"

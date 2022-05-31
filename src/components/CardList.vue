@@ -1,18 +1,20 @@
 <template>
     <div>
-        <v-card-text
-            v-for="(data, index) in taskList"
-            :key="index"
-            class="pa-1"
-        >
-            <v-slide-y-transition>
-                <v-card>
-                    <v-card-title class="pa-2">
-                        {{ data.cardTitle }}
-                    </v-card-title>
-                </v-card>
-            </v-slide-y-transition>
-        </v-card-text>
+        <draggable :list="taskList"  :group="{ name: 'g1' }">
+            <v-card-text
+                v-for="(data, index) in taskList"
+                :key="index"
+                class="pa-1"
+            >
+                <v-slide-y-transition>
+                    <v-card>
+                        <v-card-title class="pa-2">
+                            {{ data.cardTitle }}
+                        </v-card-title>
+                    </v-card>
+                </v-slide-y-transition>
+            </v-card-text>
+        </draggable>
 
         <v-slide-y-transition hide-on-leave v-show="newList" class="py-0">
             <v-card-text v-show="newList" class="px-1 py-0">
@@ -43,7 +45,9 @@
 </template>
 
 <script>
+import draggable from 'vuedraggable';
 export default {
+    components: {draggable},
     props: {
         taskIndex: {
             type: Number,
