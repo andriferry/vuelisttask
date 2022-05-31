@@ -1,5 +1,8 @@
 <template>
-    <v-app>
+    <div>
+        <router-view />
+    </div>
+    <!-- <v-app>
         <v-app-bar app color="red accent-3" dark>
             <div class="d-flex align-center">
                 <v-img
@@ -23,10 +26,8 @@
             </v-btn>
         </v-app-bar>
 
-        <v-main class="red accent-2 mainStyle">
-            <router-view />
-        </v-main>
-    </v-app>
+        <v-main class="red accent-2 mainStyle"> </v-main>
+    </v-app> -->
 </template>
 
 <script>
@@ -35,7 +36,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .mainStyle {
     overflow-x: auto;
     overflow-y: auto;
