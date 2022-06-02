@@ -6,8 +6,11 @@
                 style="gap: 1rem"
             >
                 <v-img
-                    alt="Vuetify Logo"
-                    src="@/assets/logo.png"
+                    alt="taskIcon"
+                    src="@/assets/taskIcon.svg"
+                    eager
+                    width="300"
+                    height="300"
                     transition="scale-transition"
                 />
 

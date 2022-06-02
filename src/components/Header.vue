@@ -9,7 +9,9 @@
                 alt="Vuetify Logo"
                 class="shrink mr-2"
                 contain
-                src="@/assets/logo.png"
+                src="@/assets/taskIcon.svg"
+                lazy-src="@/assets/taskIcon.svg"
+                eager
                 transition="scale-transition"
                 width="40"
             />
