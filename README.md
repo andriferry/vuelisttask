@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://vuelisttodo.firebaseapp.com/" target="_blank">
-    <img src="https://github.com/andriferry/vuelisttask/blob/master/image.gif" width="400">
+    <img src="https://github.com/andriferry/vuelisttask/blob/master/image.gif" width="1000">
   </a>
 </p>
 
